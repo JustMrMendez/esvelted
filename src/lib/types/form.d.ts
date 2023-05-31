@@ -1,23 +1,94 @@
+type BaseFieldType = {
+	type:
+		| 'text'
+		| 'password'
+		| 'tel'
+		| 'email'
+		| 'url'
+		| 'number'
+		| 'date'
+		| 'checkbox'
+		| 'radio'
+		| 'select'
+		| 'file';
+};
+
+// Common attributes for form fields
 type SharedProperties = {
 	name: string;
-	label: string;
-	minLength?: number;
-	maxLength?: number;
+	placeholder?: string;
+	label?: string;
+	autocomplete?: 'on' | 'off';
 	pattern?: string;
 	validationMessage?: string;
+	required?: boolean;
+	autofocus?: boolean;
+	autocapitalize?: 'on' | 'off';
+	readOnly?: boolean;
+	disabled?: boolean;
+	readonly?: boolean;
+};
+
+type TextFieldAttributes = {
+	minLength?: number;
+	maxLength?: number;
+	value?: string;
+};
+
+type NumberFieldAttributes = {
+	min?: number;
+	max?: number;
+	step?: number;
+	value?: number;
+};
+
+type DateFieldAttributes = {
+	min?: string;
+	max?: string;
+	valueAsDate?: Date;
+};
+
+type CheckboxOrRadioFieldAttributes = {
+	checked?: boolean;
+	defaultChecked?: boolean;
+	indeterminate?: boolean;
+};
+
+type SelectFieldAttributes = {
+	options: Option[];
+	multiple?: boolean;
+};
+
+type FileFieldAttributes = {
+	accept?: string;
+	files?: FileList;
+	webkitdirectory?: boolean;
 };
 
 // Field Types
-type TextFieldType = {
-	type: 'text' | 'password' | 'email' | 'url';
-	placeholder?: string;
-} & SharedProperties;
+type TextFieldType = BaseFieldType & {
+	attributes: TextFieldAttributes & Omit<SharedProperties, 'type'>;
+};
 
-type NumberFieldType = { type: 'number'; min?: number; max?: number; step?: number };
-type DateFieldType = { type: 'date'; min?: string; max?: string };
-type CheckboxOrRadioFieldType = { type: 'checkbox' | 'radio'; value?: boolean };
-type SelectFieldType = { type: 'select'; options: Option[] };
-type FileFieldType = { type: 'file'; accept?: string };
+type NumberFieldType = BaseFieldType & {
+	attributes: NumberFieldAttributes & Omit<SharedProperties, 'type'>;
+};
+
+type DateFieldType = BaseFieldType & {
+	attributes: DateFieldAttributes & Omit<SharedProperties, 'type'>;
+};
+
+type CheckboxOrRadioFieldType = BaseFieldType & {
+	attributes: CheckboxOrRadioFieldAttributes & Omit<SharedProperties, 'type'>;
+};
+
+type SelectFieldType = BaseFieldType & {
+	attributes: SelectFieldAttributes & Omit<SharedProperties, 'type'>;
+};
+
+type FileFieldType = BaseFieldType & {
+	attributes: FileFieldAttributes & Omit<SharedProperties, 'type'>;
+};
 
 // Unified FormFieldType
 export type FormFieldType =
@@ -28,51 +99,15 @@ export type FormFieldType =
 	| SelectFieldType
 	| FileFieldType;
 
-export interface Option {
+interface Option {
 	value: string | number;
 	label: string;
 }
 
-export type BooleanAttributes = {
-	autofocus?: boolean;
-	checked?: boolean;
-	disabled?: boolean;
-	formnovalidate?: boolean;
-	multiple?: boolean;
-	readonly?: boolean;
-	required?: boolean;
-	spellcheck?: boolean;
-};
-
-export type InputAttributes = {
-	accept?: string;
-	alt?: string;
-	autocomplete?: 'on' | 'off';
-	capture?: string; // often used with file type input
-	formaction?: string;
-	formenctype?: string;
-	formmethod?: 'GET' | 'POST';
-	formtarget?: string;
-	height?: string;
-	width?: string;
-	list?: string;
-	max?: string;
-	min?: string;
-	pattern?: string;
-	placeholder?: string;
-	step?: string;
-} & BooleanAttributes;
-
-type FormFieldBase = {
-	id: string;
-	name: string;
-	label: string;
-	type: FormFieldType['type'];
-} & InputAttributes;
-
-export type FormField = FormFieldBase & FormFieldType;
-
-export type CombinedKeys = keyof FormField;
+export interface FormField extends BaseFieldType {
+	attributes: SharedProperties;
+	options?: Option[];
+}
 
 export interface Form {
 	fields: FormField[];

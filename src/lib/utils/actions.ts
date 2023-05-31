@@ -2,3 +2,4 @@
 export function dynamicType(node: HTMLInputElement, type: string) {
 	node.type = type;
 }
+
