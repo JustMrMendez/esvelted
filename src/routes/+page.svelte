@@ -1,3 +1,18 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import FieldBuilder from '$lib/components/FieldBuilder.svelte';
+	import { createEventDispatcher } from 'svelte';
+	import type { FormField } from '$lib/types/form.d.ts';
+
+	export let field: FormField = {
+		id: '1',
+		name: 'username',
+		label: 'Username',
+		type: 'text',
+		placeholder: 'Enter your username',
+		required: true
+	};
+
+	$: console.log(field);
+</script>
+
+<FieldBuilder  />
