@@ -105,6 +105,7 @@ interface Option {
 }
 
 export interface FormField extends BaseFieldType {
+	validate?: boolean;
 	attributes: SharedProperties;
 	options?: Option[];
 }

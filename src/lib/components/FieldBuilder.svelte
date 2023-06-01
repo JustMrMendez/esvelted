@@ -32,10 +32,10 @@
 </script>
 
 <div class="">
-	<form class="card p-4 space-y-4">
+	<form class="card p-4 space-y-4 flex flex-col mb-4">
 		<div class="grid grid-cols-2 gap-4">
 			<label class="label" for="type">
-				Type
+				Field Type
 				<select id="type" bind:value={$field.type} class="select">
 					<option value={'text'}>Text</option>
 					<option value="password">Password</option>
@@ -49,6 +49,19 @@
 				</select>
 			</label>
 			<svelte:component this={selected} />
+
+			{#if $field.validate}
+				<label class="label" for="validationMessage">
+					Validation Message
+					<input
+						type="text"
+						id="validationMessage"
+						name="validationMessage"
+						bind:value={$field.attributes.validationMessage}
+						class="input"
+					/>
+				</label>
+			{/if}
 		</div>
 		<div class="grid w-full grid-cols-4 gap-4">
 			<!-- checkboxes list of boolean attributes -->
@@ -94,10 +107,29 @@
 				/>
 				<p>Autocapitalize</p>
 			</label>
+			<label class="flex items-center space-x-2">
+				<input type="checkbox" class="checkbox" bind:checked={$field.validate} />
+				<p>Validate</p>
+			</label>
 		</div>
-		<button type="submit" class="btn variant-filled-primary"> Create Field </button>
+		<button type="submit" class="btn variant-filled-primary">
+			<!-- add icon -->
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6 inline-block mr-2"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+				/>
+			</svg>
+			Field
+		</button>
 	</form>
-	<pre>
-	{@html JSON.stringify($field, null, 2)}
-	</pre>
+	<pre>{@html JSON.stringify($field, null, 2)}</pre>
 </div>
