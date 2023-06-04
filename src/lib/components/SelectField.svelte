@@ -1,53 +1,36 @@
 <script lang="ts">
 	import { dynamicType } from '$lib/utils/actions.js';
 	import type { SelectFieldType } from '../types/form.d.ts';
+	import { field } from '../stores/stores.js';
 
-	export let field: SelectFieldType;
-
-	$: {
-		if (field.type === 'select') {
-			field = {
-				...field,
-				attributes: {
-					...field.attributes,
-					options: field.attributes.options || []
-				}
-			};
-		}
-	}
+	export let selectField = $field as SelectFieldType;
 </script>
 
 <label class="label" for="name">
 	Name
-	<input use:dynamicType={field.type} name="name" id="name" class="input" />
+	<input use:dynamicType={selectField.type} name="name" id="name" class="input" />
 </label>
 
 <label class="label" for="label" contenteditable="true">
 	Label
-	<input type="text" id="label" name="label" bind:value={field.attributes.label} class="input" />
+	<input
+		type="text"
+		id="label"
+		name="label"
+		bind:value={selectField.attributes.label}
+		class="input"
+	/>
 </label>
 
-{#if field.type === 'select'}
-	<div>
-		<label class="label" for="options">
-			Options
-			<input
-				type="text"
-				id="options"
-				bind:value={field.attributes.options}
-				name="options"
-				class="input"
-			/>
-		</label>
-		<label class="label" for="multiple">
-			Multiple
-			<input
-				type="checkbox"
-				id="multiple"
-				bind:checked={field.attributes.multiple}
-				name="multiple"
-				class="input"
-			/>
-		</label>
-	</div>
+{#if selectField.type === 'select'}
+	<label class="label" for="options">
+		Options
+		<input
+			type="text"
+			id="options"
+			bind:value={selectField.attributes.options}
+			name="options"
+			class="input"
+		/>
+	</label>
 {/if}

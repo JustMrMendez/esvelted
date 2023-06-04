@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { dynamicType } from '$lib/utils/actions.js';
-	import type { NumberFieldType } from '../types/form.d.ts';
+	import type { FormField, NumberFieldType } from '../types/form.d.ts';
 	import { field } from '../stores/stores.js';
 
 	let numberField = $field as NumberFieldType;
 
-	$: $field = numberField;
+	$: $field = numberField as FormField;
+
 	$: {
 		switch (numberField.type) {
 			case 'number':

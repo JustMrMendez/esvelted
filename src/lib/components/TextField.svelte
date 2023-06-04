@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { dynamicType } from '$lib/utils/actions.js';
-	import type { TextFieldType } from '../types/form.d.ts';
+	import type { FormField, TextFieldType } from '../types/form.d.ts';
 	import { field } from '../stores/stores.js';
 
 	let textField = $field as TextFieldType;
 	$: {
-		$field = textField;
+		$field = textField as FormField;
 	}
 	$: {
 		switch (textField.type) {

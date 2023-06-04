@@ -8,8 +8,10 @@
 
 	// Finally, your application's global stylesheet (sometimes labeled 'app.css')
 	import '../app.postcss';
+	import { LightSwitch } from '@skeletonlabs/skeleton';
 </script>
 
 <main class="w-full h-screen grid place-items-center">
+	<LightSwitch />
 	<slot />
 </main>

@@ -10,16 +10,13 @@
 			case 'password':
 			case 'email':
 			case 'url':
-				console.log('rendering text field');
 				return TextField;
 			case 'number':
 			case 'tel':
-				console.log('rendering number field');
 				return NumberField;
 			case 'checkbox':
 			case 'radio':
 			case 'select':
-				console.log('rendering select field');
 				return SelectField;
 		}
 	}
@@ -111,6 +108,12 @@
 				<input type="checkbox" class="checkbox" bind:checked={$field.validate} />
 				<p>Validate</p>
 			</label>
+			{#if $field.type === 'select'}
+				<label class="flex items-center space-x-2">
+					<input type="checkbox" class="checkbox" bind:checked={$field.attributes.multiple} />
+					<p>Multi-select</p>
+				</label>
+			{/if}
 		</div>
 		<button type="submit" class="btn variant-filled-primary">
 			<!-- add icon -->

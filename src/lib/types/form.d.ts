@@ -55,7 +55,7 @@ type CheckboxOrRadioFieldAttributes = {
 };
 
 type SelectFieldAttributes = {
-	options: Option[];
+	options?: Option[];
 	multiple?: boolean;
 };
 
@@ -106,8 +106,15 @@ interface Option {
 
 export interface FormField extends BaseFieldType {
 	validate?: boolean;
-	attributes: SharedProperties;
+	attributes: SharedProperties &
+		TextFieldAttributes &
+		NumberFieldAttributes &
+		DateFieldAttributes &
+		CheckboxOrRadioFieldAttributes &
+		SelectFieldAttributes &
+		FileFieldAttributes;
 	options?: Option[];
+	[key: string]: unknown;
 }
 
 export interface Form {
