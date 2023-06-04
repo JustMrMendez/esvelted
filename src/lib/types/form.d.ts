@@ -27,6 +27,7 @@ type SharedProperties = {
 	readOnly?: boolean;
 	disabled?: boolean;
 	readonly?: boolean;
+	[key: string]: any;
 };
 
 type TextFieldAttributes = {

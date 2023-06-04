@@ -4,6 +4,9 @@
 	import { field } from '../stores/stores.js';
 
 	export let selectField = $field as SelectFieldType;
+
+	export const extraOptions: string[] = ['multiple'];
+	export const extraAttributes: string[] = [];
 </script>
 
 <label class="label" for="name">

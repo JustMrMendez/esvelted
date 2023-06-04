@@ -21,6 +21,11 @@
 		}
 	}
 
+	let options: string[] = ['required', 'disabled', 'readonly', 'validate'];
+	let extraAttributes: string[] = [];
+	// extra options passed up from the field component
+	let extraOptions: string[] = [];
+
 	let selected = TextField;
 	$: {
 		// @ts-ignore
@@ -45,7 +50,7 @@
 					<option value="select">Select</option>
 				</select>
 			</label>
-			<svelte:component this={selected} />
+			<svelte:component this={selected} bind:extraAttributes bind:extraOptions />
 
 			{#if $field.validate}
 				<label class="label" for="validationMessage">
@@ -59,64 +64,56 @@
 					/>
 				</label>
 			{/if}
+			{#each extraAttributes as option}
+				<label class="label">
+					{option}
+					<input type="text" class="input" bind:value={$field.attributes[option]} />
+				</label>
+			{/each}
 		</div>
 		<div class="grid w-full grid-cols-4 gap-4">
 			<!-- checkboxes list of boolean attributes -->
-			<label class="flex items-center space-x-2">
-				<input type="checkbox" class="checkbox" bind:checked={$field.attributes.required} />
-				<p>Required</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input type="checkbox" class="checkbox" bind:checked={$field.attributes.disabled} />
-				<p>Disabled</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input type="checkbox" class="checkbox" bind:checked={$field.attributes.readonly} />
-				<p>Readonly</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input type="checkbox" class="checkbox" bind:checked={$field.attributes.autofocus} />
-				<p>Autofocus</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input
-					type="checkbox"
-					class="checkbox"
-					checked={$field.attributes.autocomplete === 'on'}
-					on:click={() => {
-						$field.attributes.autocomplete === 'on'
-							? ($field.attributes.autocomplete = 'off')
-							: ($field.attributes.autocomplete = 'on');
-					}}
-				/>
-				<p>Autocomplete</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input
-					type="checkbox"
-					class="checkbox"
-					checked={$field.attributes.autocapitalize === 'on'}
-					on:click={() => {
-						$field.attributes.autocapitalize === 'on'
-							? ($field.attributes.autocapitalize = 'off')
-							: ($field.attributes.autocapitalize = 'on');
-					}}
-				/>
-				<p>Autocapitalize</p>
-			</label>
-			<label class="flex items-center space-x-2">
-				<input type="checkbox" class="checkbox" bind:checked={$field.validate} />
-				<p>Validate</p>
-			</label>
-			{#if $field.type === 'select'}
+			{#each options as option}
+				{#if option === 'validate'}
+					<label class="flex items-center space-x-2">
+						<input type="checkbox" class="checkbox" bind:checked={$field.validate} />
+						<p>Validate</p>
+					</label>
+				{:else if option === 'multiple'}
+					<label class="flex items-center space-x-2">
+						<input type="checkbox" class="checkbox" bind:checked={$field.attributes.multiple} />
+						<p>Multi-select</p>
+					</label>
+				{:else}
+					<label class="flex items-center space-x-2">
+						<input type="checkbox" class="checkbox" bind:checked={$field.attributes[option]} />
+						<p>{option}</p>
+					</label>
+				{/if}
+				{#if option === 'autocomplete'}
+					<label class="flex items-center space-x-2">
+						<input
+							type="checkbox"
+							class="checkbox"
+							checked={$field.attributes.autocomplete === 'on'}
+							on:click={() => {
+								$field.attributes.autocomplete === 'on'
+									? ($field.attributes.autocomplete = 'off')
+									: ($field.attributes.autocomplete = 'on');
+							}}
+						/>
+						<p>Autocomplete</p>
+					</label>
+				{/if}
+			{/each}
+			{#each extraOptions as option}
 				<label class="flex items-center space-x-2">
-					<input type="checkbox" class="checkbox" bind:checked={$field.attributes.multiple} />
-					<p>Multi-select</p>
+					<input type="checkbox" class="checkbox" bind:checked={$field.attributes[option]} />
+					<p>{option}</p>
 				</label>
-			{/if}
+			{/each}
 		</div>
 		<button type="submit" class="btn variant-filled-primary">
-			<!-- add icon -->
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-6 w-6 inline-block mr-2"

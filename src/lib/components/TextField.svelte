@@ -4,6 +4,9 @@
 	import { field } from '../stores/stores.js';
 
 	let textField = $field as TextFieldType;
+	export const extraOptions: string[] = [];
+	export const extraAttributes: string[] = ['pattern'];
+
 	$: {
 		$field = textField as FormField;
 	}

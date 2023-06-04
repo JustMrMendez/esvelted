@@ -4,6 +4,9 @@
 	import { field } from '../stores/stores.js';
 
 	let numberField = $field as NumberFieldType;
+	// extra options passed to the parent component
+	export const extraOptions: string[] = [];
+	export const extraAttributes: string[] = ['pattern', 'min', 'max', 'step'];
 
 	$: $field = numberField as FormField;
 
@@ -25,7 +28,7 @@
 					...numberField,
 					attributes: {
 						...numberField.attributes,
-						pattern: '[0-9]{3}-[0-9]{3}-[0-9]{4}',
+						pattern: '*.##',
 						validationMessage: 'Please enter a valid phone number'
 					}
 				};
@@ -55,38 +58,3 @@
 		class="input"
 	/>
 </label>
-
-{#if numberField.type === 'number'}
-	<label class="label" for="min">
-		Min
-		<input
-			type="number"
-			id="min"
-			bind:value={numberField.attributes.min}
-			name="min"
-			class="input"
-		/>
-	</label>
-
-	<label class="label" for="max">
-		Max
-		<input
-			type="number"
-			id="max"
-			bind:value={numberField.attributes.max}
-			name="max"
-			class="input"
-		/>
-	</label>
-
-	<label class="label" for="step">
-		Step
-		<input
-			type="number"
-			id="step"
-			bind:value={numberField.attributes.step}
-			name="step"
-			class="input"
-		/>
-	</label>
-{/if}

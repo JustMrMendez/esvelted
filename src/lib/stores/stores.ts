@@ -12,7 +12,7 @@ export const field = writable<FormField>({
 		validationMessage: 'Please enter a valid username',
 		required: true,
 		autofocus: true,
-		readOnly: false,
+		readonly: false,
 		disabled: false
 	}
 });
