@@ -1,7 +1,7 @@
 <script lang="ts">
 	import RenderField from './../lib/components/RenderField.svelte';
 	import FieldBuilder from '$lib/components/FieldBuilder.svelte';
-	// CI: release try 2
+
 	let value: any;
 </script>
 
