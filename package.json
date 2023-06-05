@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.34.3",
+    "@semantic-release/npm": "github:semantic-release/npm",
     "@skeletonlabs/skeleton": "^1.6.2",
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.20.0",
@@ -48,6 +49,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.1",
     "publint": "^0.1.12",
+    "semantic-release": "^21.0.3",
     "semantic-release-pnpm": "^1.0.2",
     "svelte": "4.0.0-next.0",
     "svelte-check": "^3.4.3",
