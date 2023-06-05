@@ -1,58 +1,41 @@
-# create-svelte
+# esvelted
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Welcome to esvelted, a powerful Form Builder library built with Svelte, TypeScript, Tailwind CSS, and powered by the sleek Skeleton UI. Designed for developers who want to create dynamic and elegant forms in no time, this library makes form creation as simple as it gets.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+## Features
 
-## Creating a project
+- **Dynamic form creation:** Craft unique and diverse forms suited for every occasion.
+- **Intuitive design:** Leverage the simplicity and extensibility of Svelte, TypeScript, and Tailwind CSS.
+- **Styled with Skeleton UI:** Enjoy the benefits of a clean and responsive UI framework.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Development
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm install
 ```
-
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
-
-## Building
-
-To build your library:
 
 ```bash
-npm run package
+pnpm install
 ```
 
-To create a production version of your showcase app:
+Start your dev server:
 
-```bash
-npm run build
-```
+    ```bash
+    npm run dev
+    ```
+    ```bash
+    pnpm dev
+    ```
 
-You can preview the production build with `npm run preview`.
+Everything inside src/lib is part of your library, while everything inside src/routes can be used as a showcase or preview app.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Contributing
 
-## Publishing
+Contributions are always welcome. Here's how you can help:
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+- **Fork** the repository.
+- **Clone** the forked repo to your local machine.
+- **Create** a new branch from the `master` branch.
+- **Make** your changes.
+- **Push** your changes to your forked repo.
+- **Submit** a pull request to the `master` branch.
