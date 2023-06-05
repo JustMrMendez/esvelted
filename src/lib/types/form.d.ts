@@ -104,11 +104,6 @@ interface Option {
 	value: string | number;
 	label: string;
 }
-// make an iterable Option interface
-// export interface Option {
-// 	value: string | number;
-// 	label: string;
-// }
 
 export interface FormField extends BaseFieldType {
 	validate?: boolean;
