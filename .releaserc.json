@@ -1,5 +1,4 @@
 {
-    "extends": "semantic-release-pnpm",
     "branches": [
         "master"
     ],
@@ -7,7 +6,6 @@
     "plugins": [
         "@semantic-release/commit-analyzer",
         "@semantic-release/release-notes-generator",
-        "semantic-release-pnpm",
         [
             "@semantic-release/npm",
             {

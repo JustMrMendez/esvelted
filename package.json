@@ -1,6 +1,6 @@
 {
   "name": "esvelted",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "scripts": {
     "dev": "vite dev --host",
     "build": "vite build && npm run package",
@@ -52,7 +52,6 @@
     "prettier-plugin-svelte": "^2.10.1",
     "publint": "^0.1.12",
     "semantic-release": "^21.0.3",
-    "semantic-release-pnpm": "^1.0.2",
     "svelte": "4.0.0-next.0",
     "svelte-check": "^3.4.3",
     "svelte-preprocess": "^5.0.4",
