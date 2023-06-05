@@ -64,5 +64,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/JustMrMendez/esvelted.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
   }
 }
