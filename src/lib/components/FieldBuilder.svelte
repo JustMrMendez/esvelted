@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TextField, NumberField, SelectField } from '$lib/index.js';
+	import { TextField, NumberField, SelectField, CheckboxField } from '$lib/index.js';
 	// import NumberField from './NumberField.svelte';
 	// import SelectField from './SelectField.svelte';
 	import { field } from '$lib/stores/stores.js';
@@ -15,13 +15,14 @@
 			case 'tel':
 				return NumberField;
 			case 'checkbox':
-			case 'radio':
+				return CheckboxField;
 			case 'select':
 				return SelectField;
 		}
 	}
 
 	let options: string[] = ['required', 'disabled', 'readonly', 'validate'];
+	export let defaultAttributes: string[] = ['name', 'id', 'placeholder', 'value'];
 	let extraAttributes: string[] = [];
 	// extra options passed up from the field component
 	let extraOptions: string[] = [];
@@ -64,10 +65,26 @@
 					/>
 				</label>
 			{/if}
+			{#each defaultAttributes as option}
+				<label class="label">
+					{option}
+					<input
+						type="text"
+						class="input"
+						name={$field.attributes.name}
+						bind:value={$field.attributes[option]}
+					/>
+				</label>
+			{/each}
 			{#each extraAttributes as option}
 				<label class="label">
 					{option}
-					<input type="text" class="input" bind:value={$field.attributes[option]} />
+					<input
+						type="text"
+						class="input"
+						name={$field.attributes.name}
+						bind:value={$field.attributes[option]}
+					/>
 				</label>
 			{/each}
 		</div>

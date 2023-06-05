@@ -17,8 +17,8 @@
 					...numberField,
 					attributes: {
 						...numberField.attributes,
-						min: 0,
-						max: 100,
+						min: '',
+						max: '',
 						step: 1
 					}
 				};

@@ -5,7 +5,7 @@
 	import type { Option } from '../types/form.d.ts';
 	import { ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
 
-	export let value: string[];
+	export let value: string[] = [];
 
 	let options: Option[] = $field?.options || [
 		{ label: 'Option 1', value: 'option-1' },
@@ -39,14 +39,14 @@
 		return [value];
 	}
 
-	// $: value = toArray(selected);
+	$: value = toArray(selected);
 </script>
 
-<div class="h-fit p-4">
+<div class="h-fit p-4 w-full">
 	{#key $field}
-		<label class="label" for={$field.attributes.name}>
-			{$field.attributes.label || $field.attributes.name}
-			{#if $field.type === 'select'}
+		{#if $field.type === 'select'}
+			<label class="label" for={$field.attributes.name}>
+				{$field.attributes.label || $field.attributes.name}
 				{#if $field.attributes.multiple}
 					<div data-type="multiple" use:dynamicMultiple>
 						<ListBox multiple class="card !rounded-md p-4 w-full">
@@ -74,63 +74,72 @@
 						</ListBox>
 					</div>
 				{/if}
-			{:else if $field.type === 'checkbox' || $field.type === 'radio'}
-				<input
-					use:dynamicType={$field.type}
-					id={$field.attributes.name}
-					class={$field.type === 'checkbox' ? 'checkbox' : 'radio'}
-				/>
-				{$field.attributes.label || $field.attributes.name}
-			{:else if $field.type === 'tel'}
-				<input
-					use:dynamicType={$field.type}
-					id={$field.attributes.name}
-					class="input"
-					bind:value
-					use:format={[$field.attributes.format, numberFormat]}
-					name={$field.attributes.name}
-					placeholder={$field.attributes.placeholder}
-					autocomplete={$field.attributes.autocomplete}
-					minlength={$field.attributes.minLength}
-					maxlength={$field.attributes.maxLength}
-					required={$field.attributes.required}
-					readonly={$field.attributes.readonly}
-					disabled={$field.attributes.disabled}
-				/>
-			{:else if $field.type === 'number'}
-				<input
-					use:dynamicType={$field.type}
-					id={$field.attributes.name}
-					class="input"
-					bind:value
-					use:format={[$field.attributes.pattern, numberFormat]}
-					name={$field.attributes.name}
-					placeholder={$field.attributes.placeholder}
-					autocomplete={$field.attributes.autocomplete}
-					min={$field.attributes.min}
-					max={$field.attributes.max}
-					step={$field.attributes.step}
-					required={$field.attributes.required}
-					readonly={$field.attributes.readonly}
-					disabled={$field.attributes.disabled}
-				/>
-			{:else}
-				<input
-					use:dynamicType={$field.type}
-					id={$field.attributes.name}
-					class="input"
-					bind:value
-					name={$field.attributes.name}
-					placeholder={$field.attributes.placeholder}
-					autocomplete={$field.attributes.autocomplete}
-					pattern={$field.attributes.pattern}
-					minlength={$field.attributes.minLength}
-					maxlength={$field.attributes.maxLength}
-					required={$field.attributes.required}
-					readonly={$field.attributes.readonly}
-					disabled={$field.attributes.disabled}
-				/>
-			{/if}
-		</label>
+			</label>
+		{:else if $field.type === 'checkbox'}
+			{#each options as option}
+				<label
+					for={option.label}
+					class="hover:variant-soft flex items-center space-x-2 hover:cursor-pointer py-2 px-4"
+				>
+					<input
+						type="checkbox"
+						id={option.label}
+						class="checkbox"
+						value={option.value}
+						bind:group={selected}
+					/>
+					<span>{option.label}</span>
+				</label>
+			{/each}
+		{:else if $field.type === 'tel'}
+			<input
+				use:dynamicType={$field.type}
+				id={$field.attributes.name}
+				class="input"
+				bind:value
+				use:format={[$field.attributes.format, numberFormat]}
+				name={$field.attributes.name}
+				placeholder={$field.attributes.placeholder}
+				autocomplete={$field.attributes.autocomplete}
+				minlength={$field.attributes.minLength}
+				maxlength={$field.attributes.maxLength}
+				required={$field.attributes.required}
+				readonly={$field.attributes.readonly}
+				disabled={$field.attributes.disabled}
+			/>
+		{:else if $field.type === 'number'}
+			<input
+				use:dynamicType={$field.type}
+				id={$field.attributes.name}
+				class="input"
+				bind:value
+				use:format={[$field.attributes.pattern, numberFormat]}
+				name={$field.attributes.name}
+				placeholder={$field.attributes.placeholder}
+				autocomplete={$field.attributes.autocomplete}
+				min={$field.attributes.min}
+				max={$field.attributes.max}
+				step={$field.attributes.step}
+				required={$field.attributes.required}
+				readonly={$field.attributes.readonly}
+				disabled={$field.attributes.disabled}
+			/>
+		{:else}
+			<input
+				use:dynamicType={$field.type}
+				id={$field.attributes.name}
+				class="input"
+				bind:value
+				name={$field.attributes.name}
+				placeholder={$field.attributes.placeholder}
+				autocomplete={$field.attributes.autocomplete}
+				pattern={$field.attributes.pattern}
+				minlength={$field.attributes.minLength}
+				maxlength={$field.attributes.maxLength}
+				required={$field.attributes.required}
+				readonly={$field.attributes.readonly}
+				disabled={$field.attributes.disabled}
+			/>
+		{/if}
 	{/key}
 </div>

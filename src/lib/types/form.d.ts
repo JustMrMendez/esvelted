@@ -37,9 +37,9 @@ type TextFieldAttributes = {
 };
 
 type NumberFieldAttributes = {
-	min?: number;
-	max?: number;
-	step?: number;
+	min?: number | string;
+	max?: number | string;
+	step?: number | string;
 	value?: number;
 };
 
@@ -104,6 +104,11 @@ interface Option {
 	value: string | number;
 	label: string;
 }
+// make an iterable Option interface
+// export interface Option {
+// 	value: string | number;
+// 	label: string;
+// }
 
 export interface FormField extends BaseFieldType {
 	validate?: boolean;
